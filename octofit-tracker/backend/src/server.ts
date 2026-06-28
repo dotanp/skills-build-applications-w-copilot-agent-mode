@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express, { type Request, type Response } from 'express';
 import cors from 'cors';
 import { connectToDatabase } from './db.js';
+import { apiRouter } from './routes.js';
 
 const app = express();
 const PORT = Number(process.env.PORT ?? 8000);
@@ -13,6 +14,7 @@ const baseUrl = codespaceName
 
 app.use(cors());
 app.use(express.json());
+app.use('/api', apiRouter);
 
 app.get('/api/', (_req: Request, res: Response) => {
   res.json({
